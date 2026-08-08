@@ -10,4 +10,7 @@ class RouteConstants {
   static const String expenseDetail = '/expense-detail';
   static const String statistics = '/statistics';
   static const String settings = '/settings';
+  static const String income = '/income';
+  static const String addIncome = '/add-income';
+  static const String editIncome = '/edit-income';
 }

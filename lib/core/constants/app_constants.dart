@@ -20,6 +20,7 @@ class AppConstants {
 
   // Default currency (currency code, used with intl's NumberFormat)
   static const String defaultCurrency = 'USD';
+  static const String keyManualIncome = 'manualIncome';
 
   // Supported currencies for Settings screen
   static const List<String> supportedCurrencies = [

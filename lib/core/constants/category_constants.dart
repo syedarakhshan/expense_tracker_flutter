@@ -20,6 +20,13 @@ class ExpenseCategory {
 /// every screen (Add Expense, Statistics, Filters) reads from this list.
 class CategoryConstants {
   CategoryConstants._();
+  static const List<ExpenseCategory> incomeCategories = [
+    ExpenseCategory(name: 'Salary', icon: Icons.work_outline, color: Color(0xFF00B894)),
+    ExpenseCategory(name: 'Freelance', icon: Icons.laptop_mac, color: Color(0xFF0984E3)),
+    ExpenseCategory(name: 'Gift', icon: Icons.card_giftcard, color: Color(0xFFE84393)),
+    ExpenseCategory(name: 'Investment', icon: Icons.trending_up, color: Color(0xFF6C5CE7)),
+    ExpenseCategory(name: 'Other Income', icon: Icons.attach_money, color: Color(0xFF95A5A6)),
+  ];
 
   static const List<ExpenseCategory> categories = [
     ExpenseCategory(name: 'Food', icon: Icons.restaurant, color: Color(0xFFFF6B6B)),
@@ -37,11 +44,14 @@ class CategoryConstants {
   static List<String> get categoryNames =>
       categories.map((c) => c.name).toList();
 
-  /// Look up a full ExpenseCategory object by its name.
+  /// Look up a full ExpenseCategory object by its name, searching BOTH
+  /// expense and income category lists — needed since a single Expense
+  /// record's category could belong to either set depending on its `type`.
   /// Falls back to "Other" if the name isn't recognized —
   /// protects against corrupted/legacy data in Hive.
   static ExpenseCategory getCategoryByName(String name) {
-    return categories.firstWhere(
+    final all = [...categories, ...incomeCategories];
+    return all.firstWhere(
           (c) => c.name == name,
       orElse: () => categories.last,
     );
